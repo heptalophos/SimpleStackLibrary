@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E254FFD1-7147-4266-B9EB-644196EF337A}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include=".\StackLibrary.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="TestStackLibrary.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="StackLibrary">
+        <MSBuild Projects="StackLibrary.cbproj"/>
+    </Target>
+    <Target Name="StackLibrary:Clean">
+        <MSBuild Projects="StackLibrary.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="StackLibrary:Make">
+        <MSBuild Projects="StackLibrary.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="TestStackLibrary">
+        <MSBuild Projects="TestStackLibrary.cbproj"/>
+    </Target>
+    <Target Name="TestStackLibrary:Clean">
+        <MSBuild Projects="TestStackLibrary.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="TestStackLibrary:Make">
+        <MSBuild Projects="TestStackLibrary.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="StackLibrary;TestStackLibrary"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="StackLibrary:Clean;TestStackLibrary:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="StackLibrary:Make;TestStackLibrary:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
